@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seerat Sandhu Birthday</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: pink;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    .countdown {
+      font-size: 60px;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hidden { display: none; }
+    h1 { font-size: 40px; }
+    p { font-size: 18px; }
+  </style>
+</head>
+
+<body>
+
+<div id="countdown" class="countdown">10</div>
+
+<div id="content" class="hidden">
+  <h1>🎂 Happiest Birthday Seerat Sandhu 🎂</h1>
+  <p><strong>This kiddo turns 20 today 💕</strong></p>
+  <p>You make the world more brighter by existing in it ✨</p>
+</div>
+
+<script>
+  let count = 10;
+  const cd = document.getElementById("countdown");
+  const content = document.getElementById("content");
+
+  const timer = setInterval(() => {
+    count--;
+    cd.textContent = count;
+    if (count === 0) {
+      clearInterval(timer);
+      cd.style.display = "none";
+      content.classList.remove("hidden");
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
