@@ -1,49 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Happy Birthday Seerat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      color: pink;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      overflow: hidden;
-    }
-    #countdown {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 60px;
-    }
-    #content { display: none; }
-  </style>
+<meta charset="UTF-8">
+<title>Happy Birthday Seerat 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:black;
+  color:pink;
+  font-family:Arial, sans-serif;
+  overflow-x:hidden;
+}
+
+/* SECTIONS */
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+}
+
+/* COUNTDOWN */
+#countdown{
+  font-size:90px;
+}
+
+/* GALLERY */
+.gallery{
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:center;
+}
+.gallery img{
+  width:160px;
+  border-radius:14px;
+  border:2px solid pink;
+  box-shadow:0 0 12px pink;
+}
+
+/* CAKE */
+.cake{
+  font-size:50px;
+  margin-top:10px;
+}
+
+/* BALLOONS */
+.balloon{
+  position:fixed;
+  bottom:-100px;
+  width:40px;
+  height:60px;
+  background:pink;
+  border-radius:50%;
+  animation:float 8s infinite ease-in;
+}
+.balloon:nth-child(1){left:10%;}
+.balloon:nth-child(2){left:40%;animation-duration:9s;}
+.balloon:nth-child(3){left:70%;animation-duration:10s;}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-120vh);}
+}
+
+/* HIDDEN MESSAGE */
+.hidden-message{
+  opacity:0;
+  transition:opacity 2s;
+}
+
+/* FIREWORKS */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  pointer-events:none;
+}
+</style>
 </head>
 
 <body>
 
-<div id="countdown">10</div>
+<!-- BALLOONS -->
+<div class="balloon"></div>
+<div class="balloon"></div>
+<div class="balloon"></div>
 
-<div id="content">
-  <h1>🎂 Happiest Birthday To Seerat Sandhu 🎂</h1>
-  <p><strong>This kiddo turns 20 today 💖</strong></p>
-  <p>You make the world more brighter by existing in it ✨</p>
-</div>
+<!-- FIREWORK CANVAS -->
+<canvas id="fireworks"></canvas>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- COUNTDOWN -->
+<section id="countdownSection">
+  <div id="countdown">10</div>
+</section>
+
+<!-- INTRO -->
+<section id="intro" style="display:none;">
+  <h1>🎂 Happiest Birthday Seerat Sandhu 🎂</h1>
+  <p style="font-size:22px;"><strong>This kiddo turns 20 today 💖</strong></p>
+</section>
+
+<!-- PHOTOS -->
+<section>
+  <h2>📸 Favourite Memories</h2>
+  <div class="gallery">
+    <img src="IMG_4039.jpeg">
+    <img src="IMG_4201.jpeg">
+    <img src="IMG_4711.jpeg">
+  </div>
+</section>
+
+<!-- CAKE -->
+<section>
+  <h2>🎂 Cake for Parrot Sandhu 🎂</h2>
+  <div class="cake">🎂💖🎂</div>
+</section>
+
+<!-- HIDDEN MESSAGE -->
+<section>
+  <h2>💌</h2>
+  <p class="hidden-message" id="secret">
+    You make the world more brighter by existing in it ✨
+  </p>
+  <p class="hidden-message">
+    <strong>Happiest Birthday To Seerat Sandhu 💖</strong>
+  </p>
+</section>
 
 <script>
-  let c = 10;
-  let timer = setInterval(() => {
-    c--;
-    document.getElementById("countdown").innerText = c;
-    if (c === 0) {
-      clearInterval(timer);
-      document.getElementById("countdown").style.display = "none";
-      document.getElementById("content").style.display = "block";
+/* COUNTDOWN */
+let c=10;
+const countdown=document.getElementById("countdown");
+const intro=document.getElementById("intro");
+const music=document.getElementById("bgMusic");
+
+const timer=setInterval(()=>{
+  c--;
+  countdown.innerText=c;
+  if(c===0){
+    clearInterval(timer);
+    document.getElementById("countdownSection").style.display="none";
+    intro.style.display="flex";
+    music.play();
+    startFireworks();
+  }
+},1000);
+
+/* FIREWORKS */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+function startFireworks(){
+  setInterval(()=>{
+    const x=Math.random()*canvas.width;
+    const y=Math.random()*canvas.height/2;
+    for(let i=0;i<80;i++){
+      ctx.fillStyle="pink";
+      ctx.fillRect(
+        x+Math.random()*80,
+        y+Math.random()*80,
+        2,2
+      );
     }
-  }, 1000);
+  },500);
+}
+
+/* SCROLL REVEAL */
+window.addEventListener("scroll",()=>{
+  document.querySelectorAll(".hidden-message").forEach(el=>{
+    el.style.opacity=1;
+  });
+});
 </script>
 
 </body>
