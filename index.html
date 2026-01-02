@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Birthday Seerat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: pink;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    #countdown {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 60px;
+    }
+    #content { display: none; }
+  </style>
+</head>
+
+<body>
+
+<div id="countdown">10</div>
+
+<div id="content">
+  <h1>🎂 Happiest Birthday To Seerat Sandhu 🎂</h1>
+  <p><strong>This kiddo turns 20 today 💖</strong></p>
+  <p>You make the world more brighter by existing in it ✨</p>
+</div>
+
+<script>
+  let c = 10;
+  let timer = setInterval(() => {
+    c--;
+    document.getElementById("countdown").innerText = c;
+    if (c === 0) {
+      clearInterval(timer);
+      document.getElementById("countdown").style.display = "none";
+      document.getElementById("content").style.display = "block";
+    }
+  }, 1000);
+</script>
+
+</body>
+</html>
